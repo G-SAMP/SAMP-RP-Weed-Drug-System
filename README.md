@@ -14,4 +14,4 @@ Weed Drug System for SAMP Roleplay.
 [streamer](https://github.com/samp-incognito/samp-streamer-plugin)\
 [Pawn Compiler v3.10.9](https://github.com/pawn-lang/compiler/releases/tag/v3.10.9)
 #### Extra
-All type of pull requests are welcome
+All type of pull requests are welcome.
