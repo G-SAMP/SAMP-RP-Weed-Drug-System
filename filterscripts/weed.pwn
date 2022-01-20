@@ -43,7 +43,7 @@ new TRWeedField;
 new Text3D:WeedField3D[10000];
 new WeedFieldTimer[10000];
 new STREAMER_TAG_OBJECT:WeedFieldObject[10000];
-new WeedFieldCount;
+new TotalWeedCount;
 
 
 public OnFilterScriptInit()
@@ -85,7 +85,7 @@ CMD:weed(playerid, params[])
 			new Float:x, Float:y, Float:z;
 			new Float:x1, Float:y1, Float:z1;
 			GetPlayerPos(playerid, x, y, z);
-			if(WeedFieldCount > 10000)
+			if(TotalWeedCount > 10000)
 			{
 				return SendClientMessage(playerid, COLOR_ERROR, "You can't plant more weed seed at this field.");
 			}
@@ -107,7 +107,7 @@ CMD:weed(playerid, params[])
 					PlayerItem[playerid][0] -= 1;
 					ApplyAnimation(playerid, "BOMBER", "BOM_PLANT", 4.1, 0, 1, 1, 0, 0, 1);
 					WeedField3D[i] = CreateDynamic3DTextLabel("Seeding", COLOR_WEED_ORANGE, x, y, z, 5.0);
-					WeedFieldCount += 1;
+					TotalWeedCount += 1;
 					WeedFieldObject[i] = CreateDynamicObject(2247, x, y, z-1, 0, 0, 0);
 					return SendClientMessage(playerid, COLOR_LIGHT_BLUE, "You just plant a weed seed.");
 				}
@@ -158,7 +158,7 @@ CMD:weed(playerid, params[])
 						WeedFieldObject[i] = 0;
 						WeedField3D[i] = Text3D:0;
 						WeedFieldTimer[i] = 0;
-						WeedFieldCount -= 1;
+						TotalWeedCount -= 1;
 						return SendClientMessage(playerid, COLOR_LIGHT_BLUE, "You harvest a weed plant and got 8 gram weed.");
 					}
 					else
@@ -183,7 +183,7 @@ CMD:weed(playerid, params[])
 					WeedFieldObject[i] = 0;
 					WeedField3D[i] = Text3D:0;
 					WeedFieldTimer[i] = 0;
-					WeedFieldCount -= 1;
+					TotalWeedCount -= 1;
 					return SendClientMessage(playerid, COLOR_LIGHT_BLUE, "You just ripped weed plant.");
 				}
 			}
@@ -208,7 +208,7 @@ CMD:weed(playerid, params[])
 
 function:OnTRWeedCheckState()
 {
-	for(new i=0; i<10000; i++)
+	for(new i=0; i<TotalWeedCount; i++)
 	{
 		for(new j=0;j<61;j++)
 		{
