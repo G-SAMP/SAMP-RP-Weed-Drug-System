@@ -1,10 +1,10 @@
 /*
 ====================================
 === Created On - 2021 ==============
-=== Created By - DeViL =============
-=== Github - DeViL252   ============
-=== Discord - DeViL#7091 ===========
-=== Last Update By - DeViL =========
+=== Created By - Galax =============
+=== Github - Galax01   ============
+=== Discord - Galax#4886 ===========
+=== Last Update By - Galax =========
 === Last Updated On - 17/05/2021 ===
 ====================================
 */
