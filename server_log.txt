@@ -16097,3 +16097,795 @@ v0.3.7-R2, (C)2005-2015 SA-MP Team
 [16:30:18] ----------------------------------
 
 [16:30:18] Number of vehicle models: 0
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[09:43:55] 
+[09:43:55] Server Plugins
+[09:43:55] --------------
+[09:43:55]  Loading plugin: sscanf
+[09:43:55] 
+
+[09:43:55]  ===============================
+
+[09:43:55]       sscanf plugin loaded.     
+
+[09:43:55]         Version:  2.10.2        
+
+[09:43:55]    (c) 2020 Alex "Y_Less" Cole  
+
+[09:43:55]  ===============================
+
+[09:43:55]   Loaded.
+[09:43:55]  Loading plugin: streamer
+[09:43:55] 
+
+*** Streamer Plugin v2.9.4 by Incognito loaded ***
+
+[09:43:55]   Loaded.
+[09:43:55]  Loading plugin: pawncmd
+[09:43:55] [Pawn.CMD] plugin v3.3.3 by urShadow loaded
+[09:43:55]   Loaded.
+[09:43:55]  Loaded 3 plugins.
+
+[09:43:55] 
+[09:43:55] Filterscripts
+[09:43:55] ---------------
+[09:43:55]   Loading filterscript 'weed.amx'...
+[09:43:55]  
+[09:43:55]  
+[09:43:55]          ==============================================================
+[09:43:55]          |                                                            |
+[09:43:55]          |                                                            |
+[09:43:55]          |    YYYYYYY       YYYYYYY    SSSSSSSSSSSSSSS  IIIIIIIIII    |
+[09:43:55]          |    Y:::::Y       Y:::::Y  SS:::::::::::::::S I::::::::I    |
+[09:43:55]          |    Y:::::Y       Y:::::Y S:::::SSSSSS::::::S I::::::::I    |
+[09:43:55]          |    Y::::::Y     Y::::::Y S:::::S     SSSSSSS II::::::II    |
+[09:43:55]          |    YYY:::::Y   Y:::::YYY S:::::S               I::::I      |
+[09:43:55]          |       Y:::::Y Y:::::Y    S:::::S               I::::I      |
+[09:43:55]          |        Y:::::Y:::::Y      S::::SSSS            I::::I      |
+[09:43:55]          |         Y:::::::::Y        SS::::::SSSSS       I::::I      |
+[09:43:55]          |          Y:::::::Y           SSS::::::::SS     I::::I      |
+[09:43:55]          |           Y:::::Y               SSSSSS::::S    I::::I      |
+[09:43:55]          |           Y:::::Y                    S:::::S   I::::I      |
+[09:43:55]          |           Y:::::Y                    S:::::S   I::::I      |
+[09:43:55]          |           Y:::::Y        SSSSSSS     S:::::S II::::::II    |
+[09:43:55]          |        YYYY:::::YYYY     S::::::SSSSSS:::::S I::::::::I    |
+[09:43:55]          |        Y:::::::::::Y     S:::::::::::::::SS  I::::::::I    |
+[09:43:55]          |        YYYYYYYYYYYYY      SSSSSSSSSSSSSSS    IIIIIIIIII    |
+[09:43:55]          |                                                            |
+[09:43:55]          |                                                            |
+[09:43:55]          |                      (c) 2021 MPL v1.1                     |
+[09:43:55]          |            Alex "Y_Less" Cole and contributors.            |
+[09:43:55]          |                                                            |
+[09:43:55]          |                                                            |
+[09:43:55]          ==============================================================
+[09:43:55]  
+[09:43:55]  
+[09:43:55]  ========================================== 
+[09:43:55]  |                                        | 
+[09:43:55]  |  Missing YSI scriptfiles directories:  | 
+[09:43:55]  |                                        | 
+[09:43:55]  |      /scriptfiles/YSI/fixes/           | 
+[09:43:55]  |      /scriptfiles/YSI/temp/            | 
+[09:43:55]  |                                        | 
+[09:43:55]  ========================================== 
+[09:43:55]  |                                        | 
+[09:43:55]  |   Generating code, this may take a     | 
+[09:43:55]  |  little bit of time.  Note that this   | 
+[09:43:55]  |  code generation works best with the   | 
+[09:43:55]  |     JIT plugin, which you are not      | 
+[09:43:55]  |     currently using.  Get it here:     | 
+[09:43:55]  |                                        | 
+[09:43:55]  |       https://git.io/jit-plugin        | 
+[09:43:55]  |                                        | 
+[09:43:55]  |             Please wait...             | 
+[09:43:56]  |                                        | 
+[09:43:56]  |                 Done!                  | 
+[09:43:56]  |                                        | 
+[09:43:56]  ========================================== 
+[09:43:56]  |                                        | 
+[09:43:56]  | Server:      0.3.7 - Windows           | 
+[09:43:56]  | Compiler:    3.10.10 - Windows         | 
+[09:43:56]  | Codepage:    <none>                    | 
+[09:43:56]  | YSI:         5.06.1932                 | 
+[09:43:56]  | Started:     1656476035                | 
+[09:43:56]  | JIT:         <none>                    | 
+[09:43:56]  | Crashdetect: <none>                    | 
+[09:43:56]  |                                        | 
+[09:43:56]  ========================================== 
+[09:43:56]  |                                        | 
+[09:43:56]  | Unable to check the latest YSI version | 
+[09:43:56]  | - please watch the forums and github:  | 
+[09:43:56]  |                                        | 
+[09:43:56]  |          https://git.io/5.x            | 
+[09:43:56]  |                                        | 
+[09:43:56]  ========================================== 
+[09:43:56]  
+[09:43:56]  
+[09:43:56] 
+---------------------------------
+[09:43:56]  Weed has been loaded by DeViL.
+[09:43:56] -----------------------------------
+
+[09:43:56]   Loaded 1 filterscripts.
+
+[09:43:56] AllowAdminTeleport() : function is deprecated. Please see OnPlayerClickMap()
+[09:43:56] 
+----------------------------------
+[09:43:56]   Bare Script
+
+[09:43:56] ----------------------------------
+
+[09:43:56] Number of vehicle models: 0
+[09:44:10] [connection] 127.0.0.1:64891 requests connection cookie.
+[09:44:11] [connection] incoming connection: 127.0.0.1:64891 id: 0
+[09:44:11] [join] Amuso has joined the server (0:127.0.0.1)
+[09:44:42] RCON (In-Game): Player #0 (Amuso) has logged in.
+[09:54:18] [part] Amuso has left the server (0:1)
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[09:57:00] 
+[09:57:00] Server Plugins
+[09:57:00] --------------
+[09:57:00]  Loading plugin: sscanf
+[09:57:00] 
+
+[09:57:00]  ===============================
+
+[09:57:00]       sscanf plugin loaded.     
+
+[09:57:00]         Version:  2.10.2        
+
+[09:57:00]    (c) 2020 Alex "Y_Less" Cole  
+
+[09:57:00]  ===============================
+
+[09:57:00]   Loaded.
+[09:57:00]  Loading plugin: streamer
+[09:57:00] 
+
+*** Streamer Plugin v2.9.4 by Incognito loaded ***
+
+[09:57:00]   Loaded.
+[09:57:00]  Loading plugin: pawncmd
+[09:57:00] [Pawn.CMD] plugin v3.3.3 by urShadow loaded
+[09:57:00]   Loaded.
+[09:57:00]  Loaded 3 plugins.
+
+[09:57:00] 
+[09:57:00] Filterscripts
+[09:57:00] ---------------
+[09:57:00]   Loading filterscript 'weed.amx'...
+[09:57:00]  
+[09:57:00]  
+[09:57:00]          ==============================================================
+[09:57:00]          |                                                            |
+[09:57:00]          |                                                            |
+[09:57:00]          |    YYYYYYY       YYYYYYY    SSSSSSSSSSSSSSS  IIIIIIIIII    |
+[09:57:00]          |    Y:::::Y       Y:::::Y  SS:::::::::::::::S I::::::::I    |
+[09:57:00]          |    Y:::::Y       Y:::::Y S:::::SSSSSS::::::S I::::::::I    |
+[09:57:00]          |    Y::::::Y     Y::::::Y S:::::S     SSSSSSS II::::::II    |
+[09:57:00]          |    YYY:::::Y   Y:::::YYY S:::::S               I::::I      |
+[09:57:00]          |       Y:::::Y Y:::::Y    S:::::S               I::::I      |
+[09:57:00]          |        Y:::::Y:::::Y      S::::SSSS            I::::I      |
+[09:57:00]          |         Y:::::::::Y        SS::::::SSSSS       I::::I      |
+[09:57:00]          |          Y:::::::Y           SSS::::::::SS     I::::I      |
+[09:57:00]          |           Y:::::Y               SSSSSS::::S    I::::I      |
+[09:57:00]          |           Y:::::Y                    S:::::S   I::::I      |
+[09:57:00]          |           Y:::::Y                    S:::::S   I::::I      |
+[09:57:00]          |           Y:::::Y        SSSSSSS     S:::::S II::::::II    |
+[09:57:00]          |        YYYY:::::YYYY     S::::::SSSSSS:::::S I::::::::I    |
+[09:57:00]          |        Y:::::::::::Y     S:::::::::::::::SS  I::::::::I    |
+[09:57:00]          |        YYYYYYYYYYYYY      SSSSSSSSSSSSSSS    IIIIIIIIII    |
+[09:57:00]          |                                                            |
+[09:57:00]          |                                                            |
+[09:57:00]          |                      (c) 2021 MPL v1.1                     |
+[09:57:00]          |            Alex "Y_Less" Cole and contributors.            |
+[09:57:00]          |                                                            |
+[09:57:00]          |                                                            |
+[09:57:00]          ==============================================================
+[09:57:00]  
+[09:57:00]  
+[09:57:00]  ========================================== 
+[09:57:00]  |                                        | 
+[09:57:00]  |  Missing YSI scriptfiles directories:  | 
+[09:57:00]  |                                        | 
+[09:57:00]  |      /scriptfiles/YSI/fixes/           | 
+[09:57:00]  |      /scriptfiles/YSI/temp/            | 
+[09:57:00]  |                                        | 
+[09:57:00]  ========================================== 
+[09:57:00]  |                                        | 
+[09:57:00]  |   Generating code, this may take a     | 
+[09:57:00]  |  little bit of time.  Note that this   | 
+[09:57:00]  |  code generation works best with the   | 
+[09:57:00]  |     JIT plugin, which you are not      | 
+[09:57:00]  |     currently using.  Get it here:     | 
+[09:57:00]  |                                        | 
+[09:57:00]  |       https://git.io/jit-plugin        | 
+[09:57:00]  |                                        | 
+[09:57:00]  |             Please wait...             | 
+[09:57:00]  |                                        | 
+[09:57:00]  |                 Done!                  | 
+[09:57:00]  |                                        | 
+[09:57:00]  ========================================== 
+[09:57:00]  |                                        | 
+[09:57:00]  | Server:      0.3.7 - Windows           | 
+[09:57:00]  | Compiler:    3.10.10 - Windows         | 
+[09:57:00]  | Codepage:    <none>                    | 
+[09:57:00]  | YSI:         5.06.1932                 | 
+[09:57:00]  | Started:     1656476820                | 
+[09:57:00]  | JIT:         <none>                    | 
+[09:57:00]  | Crashdetect: <none>                    | 
+[09:57:00]  |                                        | 
+[09:57:00]  ========================================== 
+[09:57:00]  |                                        | 
+[09:57:00]  | Unable to check the latest YSI version | 
+[09:57:00]  | - please watch the forums and github:  | 
+[09:57:00]  |                                        | 
+[09:57:00]  |          https://git.io/5.x            | 
+[09:57:00]  |                                        | 
+[09:57:00]  ========================================== 
+[09:57:00]  
+[09:57:00]  
+[09:57:00] 
+---------------------------------
+[09:57:00]  Weed has been loaded by DeViL.
+[09:57:00] -----------------------------------
+
+[09:57:00]   Loaded 1 filterscripts.
+
+[09:57:00] AllowAdminTeleport() : function is deprecated. Please see OnPlayerClickMap()
+[09:57:00] 
+----------------------------------
+[09:57:00]   Bare Script
+
+[09:57:00] ----------------------------------
+
+[09:57:00] Number of vehicle models: 0
+[09:57:25] [connection] 127.0.0.1:56652 requests connection cookie.
+[09:57:26] [connection] incoming connection: 127.0.0.1:56652 id: 0
+[09:57:27] [join] Amuso has joined the server (0:127.0.0.1)
+[09:58:22] RCON (In-Game): Player #0 (Amuso) has logged in.
+[10:09:30] [part] Amuso has left the server (0:1)
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[10:09:54] 
+[10:09:54] Server Plugins
+[10:09:54] --------------
+[10:09:54]  Loading plugin: sscanf
+[10:09:54] 
+
+[10:09:54]  ===============================
+
+[10:09:54]       sscanf plugin loaded.     
+
+[10:09:54]         Version:  2.10.2        
+
+[10:09:54]    (c) 2020 Alex "Y_Less" Cole  
+
+[10:09:54]  ===============================
+
+[10:09:54]   Loaded.
+[10:09:54]  Loading plugin: streamer
+[10:09:54] 
+
+*** Streamer Plugin v2.9.4 by Incognito loaded ***
+
+[10:09:54]   Loaded.
+[10:09:54]  Loading plugin: pawncmd
+[10:09:54] [Pawn.CMD] plugin v3.3.3 by urShadow loaded
+[10:09:54]   Loaded.
+[10:09:54]  Loaded 3 plugins.
+
+[10:09:54] 
+[10:09:54] Filterscripts
+[10:09:54] ---------------
+[10:09:54]   Loading filterscript 'weed.amx'...
+[10:09:54]  
+[10:09:54]  
+[10:09:54]          ==============================================================
+[10:09:54]          |                                                            |
+[10:09:54]          |                                                            |
+[10:09:54]          |    YYYYYYY       YYYYYYY    SSSSSSSSSSSSSSS  IIIIIIIIII    |
+[10:09:54]          |    Y:::::Y       Y:::::Y  SS:::::::::::::::S I::::::::I    |
+[10:09:54]          |    Y:::::Y       Y:::::Y S:::::SSSSSS::::::S I::::::::I    |
+[10:09:54]          |    Y::::::Y     Y::::::Y S:::::S     SSSSSSS II::::::II    |
+[10:09:54]          |    YYY:::::Y   Y:::::YYY S:::::S               I::::I      |
+[10:09:54]          |       Y:::::Y Y:::::Y    S:::::S               I::::I      |
+[10:09:54]          |        Y:::::Y:::::Y      S::::SSSS            I::::I      |
+[10:09:54]          |         Y:::::::::Y        SS::::::SSSSS       I::::I      |
+[10:09:54]          |          Y:::::::Y           SSS::::::::SS     I::::I      |
+[10:09:54]          |           Y:::::Y               SSSSSS::::S    I::::I      |
+[10:09:54]          |           Y:::::Y                    S:::::S   I::::I      |
+[10:09:54]          |           Y:::::Y                    S:::::S   I::::I      |
+[10:09:54]          |           Y:::::Y        SSSSSSS     S:::::S II::::::II    |
+[10:09:54]          |        YYYY:::::YYYY     S::::::SSSSSS:::::S I::::::::I    |
+[10:09:54]          |        Y:::::::::::Y     S:::::::::::::::SS  I::::::::I    |
+[10:09:54]          |        YYYYYYYYYYYYY      SSSSSSSSSSSSSSS    IIIIIIIIII    |
+[10:09:54]          |                                                            |
+[10:09:54]          |                                                            |
+[10:09:54]          |                      (c) 2021 MPL v1.1                     |
+[10:09:54]          |            Alex "Y_Less" Cole and contributors.            |
+[10:09:54]          |                                                            |
+[10:09:54]          |                                                            |
+[10:09:54]          ==============================================================
+[10:09:54]  
+[10:09:54]  
+[10:09:54]  ========================================== 
+[10:09:54]  |                                        | 
+[10:09:54]  |  Missing YSI scriptfiles directories:  | 
+[10:09:54]  |                                        | 
+[10:09:54]  |      /scriptfiles/YSI/fixes/           | 
+[10:09:54]  |      /scriptfiles/YSI/temp/            | 
+[10:09:54]  |                                        | 
+[10:09:54]  ========================================== 
+[10:09:54]  |                                        | 
+[10:09:54]  |   Generating code, this may take a     | 
+[10:09:54]  |  little bit of time.  Note that this   | 
+[10:09:54]  |  code generation works best with the   | 
+[10:09:54]  |     JIT plugin, which you are not      | 
+[10:09:54]  |     currently using.  Get it here:     | 
+[10:09:54]  |                                        | 
+[10:09:54]  |       https://git.io/jit-plugin        | 
+[10:09:54]  |                                        | 
+[10:09:54]  |             Please wait...             | 
+[10:09:54]  |                                        | 
+[10:09:54]  |                 Done!                  | 
+[10:09:54]  |                                        | 
+[10:09:54]  ========================================== 
+[10:09:54]  |                                        | 
+[10:09:54]  | Server:      0.3.7 - Windows           | 
+[10:09:54]  | Compiler:    3.10.10 - Windows         | 
+[10:09:54]  | Codepage:    <none>                    | 
+[10:09:54]  | YSI:         5.06.1932                 | 
+[10:09:54]  | Started:     1656477594                | 
+[10:09:54]  | JIT:         <none>                    | 
+[10:09:54]  | Crashdetect: <none>                    | 
+[10:09:54]  |                                        | 
+[10:09:54]  ========================================== 
+[10:09:54]  |                                        | 
+[10:09:54]  | Unable to check the latest YSI version | 
+[10:09:54]  | - please watch the forums and github:  | 
+[10:09:54]  |                                        | 
+[10:09:54]  |          https://git.io/5.x            | 
+[10:09:54]  |                                        | 
+[10:09:54]  ========================================== 
+[10:09:54]  
+[10:09:54]  
+[10:09:54] 
+---------------------------------
+[10:09:54]  Weed has been loaded by DeViL.
+[10:09:54] -----------------------------------
+
+[10:09:54]   Loaded 1 filterscripts.
+
+[10:09:54] AllowAdminTeleport() : function is deprecated. Please see OnPlayerClickMap()
+[10:09:54] 
+----------------------------------
+[10:09:54]   Bare Script
+
+[10:09:54] ----------------------------------
+
+[10:09:54] Number of vehicle models: 0
+[10:10:29] [connection] 127.0.0.1:54616 requests connection cookie.
+[10:10:30] [connection] incoming connection: 127.0.0.1:54616 id: 0
+[10:10:31] [join] Amuso has joined the server (0:127.0.0.1)
+[10:10:40] RCON (In-Game): Player #0 (Amuso) has logged in.
+[10:25:51] [part] Amuso has left the server (0:1)
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[10:26:03] 
+[10:26:03] Server Plugins
+[10:26:03] --------------
+[10:26:03]  Loading plugin: sscanf
+[10:26:03] 
+
+[10:26:03]  ===============================
+
+[10:26:03]       sscanf plugin loaded.     
+
+[10:26:03]         Version:  2.10.2        
+
+[10:26:03]    (c) 2020 Alex "Y_Less" Cole  
+
+[10:26:03]  ===============================
+
+[10:26:03]   Loaded.
+[10:26:03]  Loading plugin: streamer
+[10:26:03] 
+
+*** Streamer Plugin v2.9.4 by Incognito loaded ***
+
+[10:26:03]   Loaded.
+[10:26:03]  Loading plugin: pawncmd
+[10:26:03] [Pawn.CMD] plugin v3.3.3 by urShadow loaded
+[10:26:03]   Loaded.
+[10:26:03]  Loaded 3 plugins.
+
+[10:26:03] 
+[10:26:03] Filterscripts
+[10:26:03] ---------------
+[10:26:03]   Loading filterscript 'weed.amx'...
+[10:26:03]  
+[10:26:03]  
+[10:26:03]          ==============================================================
+[10:26:03]          |                                                            |
+[10:26:03]          |                                                            |
+[10:26:03]          |    YYYYYYY       YYYYYYY    SSSSSSSSSSSSSSS  IIIIIIIIII    |
+[10:26:03]          |    Y:::::Y       Y:::::Y  SS:::::::::::::::S I::::::::I    |
+[10:26:03]          |    Y:::::Y       Y:::::Y S:::::SSSSSS::::::S I::::::::I    |
+[10:26:03]          |    Y::::::Y     Y::::::Y S:::::S     SSSSSSS II::::::II    |
+[10:26:03]          |    YYY:::::Y   Y:::::YYY S:::::S               I::::I      |
+[10:26:03]          |       Y:::::Y Y:::::Y    S:::::S               I::::I      |
+[10:26:03]          |        Y:::::Y:::::Y      S::::SSSS            I::::I      |
+[10:26:03]          |         Y:::::::::Y        SS::::::SSSSS       I::::I      |
+[10:26:03]          |          Y:::::::Y           SSS::::::::SS     I::::I      |
+[10:26:03]          |           Y:::::Y               SSSSSS::::S    I::::I      |
+[10:26:03]          |           Y:::::Y                    S:::::S   I::::I      |
+[10:26:03]          |           Y:::::Y                    S:::::S   I::::I      |
+[10:26:03]          |           Y:::::Y        SSSSSSS     S:::::S II::::::II    |
+[10:26:03]          |        YYYY:::::YYYY     S::::::SSSSSS:::::S I::::::::I    |
+[10:26:03]          |        Y:::::::::::Y     S:::::::::::::::SS  I::::::::I    |
+[10:26:03]          |        YYYYYYYYYYYYY      SSSSSSSSSSSSSSS    IIIIIIIIII    |
+[10:26:03]          |                                                            |
+[10:26:03]          |                                                            |
+[10:26:03]          |                      (c) 2021 MPL v1.1                     |
+[10:26:03]          |            Alex "Y_Less" Cole and contributors.            |
+[10:26:03]          |                                                            |
+[10:26:03]          |                                                            |
+[10:26:03]          ==============================================================
+[10:26:03]  
+[10:26:03]  
+[10:26:03]  ========================================== 
+[10:26:03]  |                                        | 
+[10:26:03]  |  Missing YSI scriptfiles directories:  | 
+[10:26:03]  |                                        | 
+[10:26:03]  |      /scriptfiles/YSI/fixes/           | 
+[10:26:03]  |      /scriptfiles/YSI/temp/            | 
+[10:26:03]  |                                        | 
+[10:26:03]  ========================================== 
+[10:26:03]  |                                        | 
+[10:26:03]  |   Generating code, this may take a     | 
+[10:26:03]  |  little bit of time.  Note that this   | 
+[10:26:03]  |  code generation works best with the   | 
+[10:26:03]  |     JIT plugin, which you are not      | 
+[10:26:03]  |     currently using.  Get it here:     | 
+[10:26:03]  |                                        | 
+[10:26:03]  |       https://git.io/jit-plugin        | 
+[10:26:03]  |                                        | 
+[10:26:03]  |             Please wait...             | 
+[10:26:03]  |                                        | 
+[10:26:03]  |                 Done!                  | 
+[10:26:03]  |                                        | 
+[10:26:03]  ========================================== 
+[10:26:03]  |                                        | 
+[10:26:03]  | Server:      0.3.7 - Windows           | 
+[10:26:03]  | Compiler:    3.10.10 - Windows         | 
+[10:26:03]  | Codepage:    <none>                    | 
+[10:26:03]  | YSI:         5.06.1932                 | 
+[10:26:03]  | Started:     1656478563                | 
+[10:26:03]  | JIT:         <none>                    | 
+[10:26:03]  | Crashdetect: <none>                    | 
+[10:26:03]  |                                        | 
+[10:26:03]  ========================================== 
+[10:26:03]  |                                        | 
+[10:26:03]  | Unable to check the latest YSI version | 
+[10:26:03]  | - please watch the forums and github:  | 
+[10:26:03]  |                                        | 
+[10:26:03]  |          https://git.io/5.x            | 
+[10:26:03]  |                                        | 
+[10:26:03]  ========================================== 
+[10:26:03]  
+[10:26:03]  
+[10:26:03] 
+---------------------------------
+[10:26:03]  Weed has been loaded by DeViL.
+[10:26:03] -----------------------------------
+
+[10:26:03]   Loaded 1 filterscripts.
+
+[10:26:03] AllowAdminTeleport() : function is deprecated. Please see OnPlayerClickMap()
+[10:26:03] 
+----------------------------------
+[10:26:03]   Bare Script
+
+[10:26:03] ----------------------------------
+
+[10:26:03] Number of vehicle models: 0
+[10:26:14] [connection] 127.0.0.1:49799 requests connection cookie.
+[10:26:15] [connection] incoming connection: 127.0.0.1:49799 id: 0
+[10:26:15] [join] Amuso has joined the server (0:127.0.0.1)
+[10:26:40] RCON (In-Game): Player #0 (Amuso) has logged in.
+[10:29:55] [part] Amuso has left the server (0:1)
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[10:31:48] 
+[10:31:48] Server Plugins
+[10:31:48] --------------
+[10:31:48]  Loading plugin: sscanf
+[10:31:48] 
+
+[10:31:48]  ===============================
+
+[10:31:48]       sscanf plugin loaded.     
+
+[10:31:48]         Version:  2.10.2        
+
+[10:31:48]    (c) 2020 Alex "Y_Less" Cole  
+
+[10:31:48]  ===============================
+
+[10:31:48]   Loaded.
+[10:31:48]  Loading plugin: streamer
+[10:31:48] 
+
+*** Streamer Plugin v2.9.4 by Incognito loaded ***
+
+[10:31:48]   Loaded.
+[10:31:48]  Loading plugin: pawncmd
+[10:31:48] [Pawn.CMD] plugin v3.3.3 by urShadow loaded
+[10:31:48]   Loaded.
+[10:31:48]  Loaded 3 plugins.
+
+[10:31:48] 
+[10:31:48] Filterscripts
+[10:31:48] ---------------
+[10:31:48]   Loading filterscript 'weed.amx'...
+[10:31:48]  
+[10:31:48]  
+[10:31:48]          ==============================================================
+[10:31:48]          |                                                            |
+[10:31:48]          |                                                            |
+[10:31:48]          |    YYYYYYY       YYYYYYY    SSSSSSSSSSSSSSS  IIIIIIIIII    |
+[10:31:48]          |    Y:::::Y       Y:::::Y  SS:::::::::::::::S I::::::::I    |
+[10:31:48]          |    Y:::::Y       Y:::::Y S:::::SSSSSS::::::S I::::::::I    |
+[10:31:48]          |    Y::::::Y     Y::::::Y S:::::S     SSSSSSS II::::::II    |
+[10:31:48]          |    YYY:::::Y   Y:::::YYY S:::::S               I::::I      |
+[10:31:48]          |       Y:::::Y Y:::::Y    S:::::S               I::::I      |
+[10:31:48]          |        Y:::::Y:::::Y      S::::SSSS            I::::I      |
+[10:31:48]          |         Y:::::::::Y        SS::::::SSSSS       I::::I      |
+[10:31:48]          |          Y:::::::Y           SSS::::::::SS     I::::I      |
+[10:31:48]          |           Y:::::Y               SSSSSS::::S    I::::I      |
+[10:31:48]          |           Y:::::Y                    S:::::S   I::::I      |
+[10:31:48]          |           Y:::::Y                    S:::::S   I::::I      |
+[10:31:48]          |           Y:::::Y        SSSSSSS     S:::::S II::::::II    |
+[10:31:48]          |        YYYY:::::YYYY     S::::::SSSSSS:::::S I::::::::I    |
+[10:31:48]          |        Y:::::::::::Y     S:::::::::::::::SS  I::::::::I    |
+[10:31:48]          |        YYYYYYYYYYYYY      SSSSSSSSSSSSSSS    IIIIIIIIII    |
+[10:31:48]          |                                                            |
+[10:31:48]          |                                                            |
+[10:31:48]          |                      (c) 2021 MPL v1.1                     |
+[10:31:48]          |            Alex "Y_Less" Cole and contributors.            |
+[10:31:48]          |                                                            |
+[10:31:48]          |                                                            |
+[10:31:48]          ==============================================================
+[10:31:48]  
+[10:31:48]  
+[10:31:48]  ========================================== 
+[10:31:48]  |                                        | 
+[10:31:48]  |  Missing YSI scriptfiles directories:  | 
+[10:31:48]  |                                        | 
+[10:31:48]  |      /scriptfiles/YSI/fixes/           | 
+[10:31:48]  |      /scriptfiles/YSI/temp/            | 
+[10:31:48]  |                                        | 
+[10:31:48]  ========================================== 
+[10:31:48]  |                                        | 
+[10:31:48]  |   Generating code, this may take a     | 
+[10:31:48]  |  little bit of time.  Note that this   | 
+[10:31:48]  |  code generation works best with the   | 
+[10:31:48]  |     JIT plugin, which you are not      | 
+[10:31:48]  |     currently using.  Get it here:     | 
+[10:31:48]  |                                        | 
+[10:31:48]  |       https://git.io/jit-plugin        | 
+[10:31:48]  |                                        | 
+[10:31:48]  |             Please wait...             | 
+[10:31:48]  |                                        | 
+[10:31:48]  |                 Done!                  | 
+[10:31:48]  |                                        | 
+[10:31:48]  ========================================== 
+[10:31:48]  |                                        | 
+[10:31:48]  | Server:      0.3.7 - Windows           | 
+[10:31:48]  | Compiler:    3.10.10 - Windows         | 
+[10:31:48]  | Codepage:    <none>                    | 
+[10:31:48]  | YSI:         5.06.1932                 | 
+[10:31:48]  | Started:     1656478908                | 
+[10:31:48]  | JIT:         <none>                    | 
+[10:31:48]  | Crashdetect: <none>                    | 
+[10:31:48]  |                                        | 
+[10:31:48]  ========================================== 
+[10:31:48]  |                                        | 
+[10:31:48]  | Unable to check the latest YSI version | 
+[10:31:48]  | - please watch the forums and github:  | 
+[10:31:48]  |                                        | 
+[10:31:48]  |          https://git.io/5.x            | 
+[10:31:48]  |                                        | 
+[10:31:48]  ========================================== 
+[10:31:48]  
+[10:31:48]  
+[10:31:48] 
+---------------------------------
+[10:31:48]  Weed has been loaded by DeViL.
+[10:31:48] -----------------------------------
+
+[10:31:48]   Loaded 1 filterscripts.
+
+[10:31:48] AllowAdminTeleport() : function is deprecated. Please see OnPlayerClickMap()
+[10:31:48] 
+----------------------------------
+[10:31:48]   Bare Script
+
+[10:31:48] ----------------------------------
+
+[10:31:48] Number of vehicle models: 0
+[10:32:50] [connection] 127.0.0.1:57680 requests connection cookie.
+[10:32:51] [connection] incoming connection: 127.0.0.1:57680 id: 0
+[10:32:52] [join] Amuso has joined the server (0:127.0.0.1)
+[10:33:01] RCON (In-Game): Player #0 (Amuso) has logged in.
+[10:48:38] [part] Amuso has left the server (0:1)
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[10:49:15] 
+[10:49:15] Server Plugins
+[10:49:15] --------------
+[10:49:15]  Loading plugin: sscanf
+[10:49:15] 
+
+[10:49:15]  ===============================
+
+[10:49:15]       sscanf plugin loaded.     
+
+[10:49:15]         Version:  2.10.2        
+
+[10:49:15]    (c) 2020 Alex "Y_Less" Cole  
+
+[10:49:15]  ===============================
+
+[10:49:15]   Loaded.
+[10:49:15]  Loading plugin: streamer
+[10:49:15] 
+
+*** Streamer Plugin v2.9.4 by Incognito loaded ***
+
+[10:49:15]   Loaded.
+[10:49:15]  Loading plugin: pawncmd
+[10:49:15] [Pawn.CMD] plugin v3.3.3 by urShadow loaded
+[10:49:15]   Loaded.
+[10:49:15]  Loaded 3 plugins.
+
+[10:49:15] 
+[10:49:15] Filterscripts
+[10:49:15] ---------------
+[10:49:15]   Loading filterscript 'weed.amx'...
+[10:49:15]  
+[10:49:15]  
+[10:49:15]          ==============================================================
+[10:49:15]          |                                                            |
+[10:49:15]          |                                                            |
+[10:49:15]          |    YYYYYYY       YYYYYYY    SSSSSSSSSSSSSSS  IIIIIIIIII    |
+[10:49:15]          |    Y:::::Y       Y:::::Y  SS:::::::::::::::S I::::::::I    |
+[10:49:15]          |    Y:::::Y       Y:::::Y S:::::SSSSSS::::::S I::::::::I    |
+[10:49:15]          |    Y::::::Y     Y::::::Y S:::::S     SSSSSSS II::::::II    |
+[10:49:15]          |    YYY:::::Y   Y:::::YYY S:::::S               I::::I      |
+[10:49:15]          |       Y:::::Y Y:::::Y    S:::::S               I::::I      |
+[10:49:15]          |        Y:::::Y:::::Y      S::::SSSS            I::::I      |
+[10:49:15]          |         Y:::::::::Y        SS::::::SSSSS       I::::I      |
+[10:49:15]          |          Y:::::::Y           SSS::::::::SS     I::::I      |
+[10:49:15]          |           Y:::::Y               SSSSSS::::S    I::::I      |
+[10:49:15]          |           Y:::::Y                    S:::::S   I::::I      |
+[10:49:15]          |           Y:::::Y                    S:::::S   I::::I      |
+[10:49:15]          |           Y:::::Y        SSSSSSS     S:::::S II::::::II    |
+[10:49:15]          |        YYYY:::::YYYY     S::::::SSSSSS:::::S I::::::::I    |
+[10:49:15]          |        Y:::::::::::Y     S:::::::::::::::SS  I::::::::I    |
+[10:49:15]          |        YYYYYYYYYYYYY      SSSSSSSSSSSSSSS    IIIIIIIIII    |
+[10:49:15]          |                                                            |
+[10:49:15]          |                                                            |
+[10:49:15]          |                      (c) 2021 MPL v1.1                     |
+[10:49:15]          |            Alex "Y_Less" Cole and contributors.            |
+[10:49:15]          |                                                            |
+[10:49:15]          |                                                            |
+[10:49:15]          ==============================================================
+[10:49:15]  
+[10:49:15]  
+[10:49:15]  ========================================== 
+[10:49:15]  |                                        | 
+[10:49:15]  |  Missing YSI scriptfiles directories:  | 
+[10:49:15]  |                                        | 
+[10:49:15]  |      /scriptfiles/YSI/fixes/           | 
+[10:49:15]  |      /scriptfiles/YSI/temp/            | 
+[10:49:15]  |                                        | 
+[10:49:15]  ========================================== 
+[10:49:15]  |                                        | 
+[10:49:15]  |   Generating code, this may take a     | 
+[10:49:15]  |  little bit of time.  Note that this   | 
+[10:49:15]  |  code generation works best with the   | 
+[10:49:15]  |     JIT plugin, which you are not      | 
+[10:49:15]  |     currently using.  Get it here:     | 
+[10:49:15]  |                                        | 
+[10:49:15]  |       https://git.io/jit-plugin        | 
+[10:49:15]  |                                        | 
+[10:49:15]  |             Please wait...             | 
+[10:49:15]  |                                        | 
+[10:49:15]  |                 Done!                  | 
+[10:49:15]  |                                        | 
+[10:49:15]  ========================================== 
+[10:49:15]  |                                        | 
+[10:49:15]  | Server:      0.3.7 - Windows           | 
+[10:49:15]  | Compiler:    3.10.10 - Windows         | 
+[10:49:15]  | Codepage:    <none>                    | 
+[10:49:15]  | YSI:         5.06.1932                 | 
+[10:49:15]  | Started:     1656479955                | 
+[10:49:15]  | JIT:         <none>                    | 
+[10:49:15]  | Crashdetect: <none>                    | 
+[10:49:15]  |                                        | 
+[10:49:15]  ========================================== 
+[10:49:15]  |                                        | 
+[10:49:15]  | Unable to check the latest YSI version | 
+[10:49:15]  | - please watch the forums and github:  | 
+[10:49:15]  |                                        | 
+[10:49:15]  |          https://git.io/5.x            | 
+[10:49:15]  |                                        | 
+[10:49:15]  ========================================== 
+[10:49:15]  
+[10:49:15]  
+[10:49:15] 
+---------------------------------
+[10:49:15]  Weed has been loaded by DeViL.
+[10:49:15] -----------------------------------
+
+[10:49:15]   Loaded 1 filterscripts.
+
+[10:49:15] AllowAdminTeleport() : function is deprecated. Please see OnPlayerClickMap()
+[10:49:15] 
+----------------------------------
+[10:49:15]   Bare Script
+
+[10:49:15] ----------------------------------
+
+[10:49:15] Number of vehicle models: 0
+[10:49:33] [connection] 127.0.0.1:54323 requests connection cookie.
+[10:49:34] [connection] incoming connection: 127.0.0.1:54323 id: 0
+[10:49:34] [join] Amuso has joined the server (0:127.0.0.1)
+[10:49:56] RCON (In-Game): Player #0 (Amuso) has logged in.
+[10:58:33] [part] Amuso has left the server (0:1)

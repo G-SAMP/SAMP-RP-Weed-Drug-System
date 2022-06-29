@@ -14,14 +14,24 @@ Commands :- /weed [plant/harvest/rip] , /inventory (/items,/inv), /giveitem [Wee
 Weed Fields :- TR-Bayside Tunnel Hills
 */
 
+/*
+	1 - 20 (Seeding)
+
+	61 (Harvest [Done!])
+
+*/
+
 
 #define FILTERSCRIPT
 
 #include <a_samp>
-#include <Pawn.CMD>
+//#include <Pawn.CMD>
 #include <sscanf2>
 #include <streamer>
+#include <YSI_Visual/y_commands>
 
+#pragma warning disable 239
+#define YSI_YES_HEAP_MALLOC
 
 #define COLOR_WEED_ORANGE 0xf58e20FF
 #define COLOR_WEED_YELLOW 0xede02bFF
@@ -33,8 +43,7 @@ Weed Fields :- TR-Bayside Tunnel Hills
 
 #undef MAX_PLAYERS
 #define MAX_PLAYERS 50 // SET TO MAX SERVER SLOT
-#define SCM SendClientMessage
-#define SM SendClientMessageEx
+#include <YSI_Coding\y_timers> // Include after MAX_PLAYERS if defined
 #define function:%0(%1) forward %0(%1); public %0(%1)
 
 
@@ -43,7 +52,7 @@ new TRWeedField;
 new Text3D:WeedField3D[10000];
 new WeedFieldTimer[10000];
 new STREAMER_TAG_OBJECT:WeedFieldObject[10000];
-new TotalWeedCount;
+new TotalWeedCount = 0;
 
 
 public OnFilterScriptInit()
@@ -53,7 +62,7 @@ public OnFilterScriptInit()
 	print("-----------------------------------\n");
 
 	TRWeedField = CreateDynamicRectangle(-1739.6445,2833.8943, -2166.8450,2702.3608);
-	SetTimer("OnTRWeedCheckState", 5000, true);
+	// SetTimer("OnTRWeedCheckState", 5000, true);
 	return 1;
 }
 
@@ -65,7 +74,7 @@ public OnFilterScriptExit()
 public OnPlayerClickMap(playerid, Float:fX, Float:fY, Float:fZ)
 {
 	SetPlayerPosFindZ(playerid, fX, fY, fZ);
-	SCM(playerid, COLOR_LIGHT_BLUE, "You have been teleported to marked location.");
+	SendClientMessage(playerid, COLOR_LIGHT_BLUE, "You have been teleported to marked location.");
 	return 0;
 }
 
@@ -91,7 +100,7 @@ CMD:weed(playerid, params[])
 			}
 			else if(PlayerItem[playerid][0] == 0)
 			{
-				return SCM(playerid, COLOR_ERROR, "You don't have enough weed seed to plant weed.");
+				return SendClientMessage(playerid, COLOR_ERROR, "You don't have enough weed seed to plant weed.");
 			}
 
 			for(new i=0; i < 10000; i++)
@@ -107,7 +116,7 @@ CMD:weed(playerid, params[])
 					PlayerItem[playerid][0] -= 1;
 					ApplyAnimation(playerid, "BOMBER", "BOM_PLANT", 4.1, 0, 1, 1, 0, 0, 1);
 					WeedField3D[i] = CreateDynamic3DTextLabel("Seeding", COLOR_WEED_ORANGE, x, y, z, 5.0);
-					TotalWeedCount += 1;
+					TotalWeedCount++;
 					WeedFieldObject[i] = CreateDynamicObject(2247, x, y, z-1, 0, 0, 0);
 					return SendClientMessage(playerid, COLOR_LIGHT_BLUE, "You just plant a weed seed.");
 				}
@@ -118,7 +127,7 @@ CMD:weed(playerid, params[])
 		{
 			if(PlayerItem[playerid][1] == 0)
 			{
-				return SCM(playerid, COLOR_ERROR, "You don't have enough water.");
+				return SendClientMessage(playerid, COLOR_ERROR, "You don't have enough water.");
 			}
 			for(new i=0; i < 10000; i++)
 			{
@@ -126,20 +135,20 @@ CMD:weed(playerid, params[])
 				GetDynamicObjectPos(WeedFieldObject[i], x2, y2, z2);
 				if(IsPlayerInRangeOfPoint(playerid, 2.0, x2, y2, z2))
 				{
-					if(WeedFieldTimer[i] != 21)
-					{
-						return SCM(playerid, COLOR_ERROR, "Plant won't need water.");
-					}
-					else
+					if(WeedFieldTimer[i] == 21)
 					{
 						PlayerItem[playerid][1] -= 1;
 						WeedFieldTimer[i]++;
 						UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_YELLOW, "Watering\nStage: 5\%");
 						return SendClientMessage(playerid, COLOR_LIGHT_BLUE, "You just give water to weed plant.");
 					}
+					else
+					{
+						return SendClientMessage(playerid, COLOR_ERROR, "Plant won't need water.");
+					}
 				}
 			}
-			return SCM(playerid, COLOR_ERROR, "You are not near at weed plant to watering.");
+			return SendClientMessage(playerid, COLOR_ERROR, "You are not near at weed plant to watering.");
 		}
 		else if(strfind(select, "harvest", true) != -1)
 		{
@@ -163,11 +172,11 @@ CMD:weed(playerid, params[])
 					}
 					else
 					{
-						return SCM(playerid, COLOR_ERROR, "Plant has not ready yet to harvest.");
+						return SendClientMessage(playerid, COLOR_ERROR, "Plant has not ready yet to harvest.");
 					}
 				}
 			}
-			return SCM(playerid, COLOR_ERROR, "You are not near a weed plant to harvest.");
+			return SendClientMessage(playerid, COLOR_ERROR, "You are not near a weed plant to harvest.");
 		}
 		else if(strfind(select, "rip", true) != -1)
 		{
@@ -206,32 +215,35 @@ CMD:weed(playerid, params[])
 // }
 
 
-function:OnTRWeedCheckState()
+task OnTRWeedCheckState[5000]()
 {
 	for(new i=0; i<TotalWeedCount; i++)
 	{
-		for(new j=0;j<61;j++)
+		for(new j=0;j<62;j++)
 		{
 			if(WeedFieldTimer[i] == j && j<21){
 				new string[21];
 				format(string, sizeof(string), "Seeding\nStage: %i\%", j*5);
 				UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_ORANGE, string);
 				WeedFieldTimer[i]++;
+				break;
 			}
-			else if(WeedFieldTimer[i] == 21){
+			else if(WeedFieldTimer[i] == 21 && j == 21){
 				new Float:x, Float:y, Float:z;
 				GetDynamicObjectPos(WeedFieldObject[i], x, y, z);
 				DestroyDynamicObject(WeedFieldObject[i]);
 				WeedFieldObject[i] = CreateDynamicObject(806, x, y, z, 0, 0, 0);
 				UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_YELLOW, "Need Water");
+				break;
 			}
 			else if(WeedFieldTimer[i] == j && j>21 && j<41){
 				new string[21];
 				format(string, sizeof(string), "Watering\nStage: %i\%", (j-21)*5);
 				UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_YELLOW, string);
 				WeedFieldTimer[i]++;
+				break;
 			}
-			else if(WeedFieldTimer[i] == 41){
+			else if(WeedFieldTimer[i] == 41 && j == 41){
 				new Float:x2, Float:y2, Float:z2;
 				GetDynamicObjectPos(WeedFieldObject[i], x2, y2, z2);
 				DestroyDynamicObject(WeedFieldObject[i]);
@@ -239,331 +251,334 @@ function:OnTRWeedCheckState()
 				WeedFieldObject[i] = CreateDynamicObject(19473, x2, y2, z2, 0, 0, 0);
 				UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_GREEN, "Flowering\nStage: 5%");
 				WeedFieldTimer[i]++;
+				break;
 			}
 			else if(WeedFieldTimer[i] == j && j>41 && j<60)
 			{
 				new string[21];
 				format(string, sizeof(string), "Flowering\nStage: %i\%", (j-41)*5);
-				UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_YELLOW, string);
+				UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_GREEN, string);
 				WeedFieldTimer[i]++;
+				break;
 			}
-			else if(WeedFieldTimer[i] == 60){
+			else if(WeedFieldTimer[i] == 60 && j == 60){
 				UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_GREEN, "Done\nStage: Ready");
 				WeedFieldTimer[i]++;
+				break;
 			}
 		}
 
 
 		// SOME PEOPLE DON'T LIKE THIS THEY WANT MULTIPLE LOOPS CYCLES 
 
-		// if(WeedFieldTimer[i] == 1)
-		// {
-		// 	UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_ORANGE, "Seeding\nStage: 5\%");
-		// 	WeedFieldTimer[i]++;
-		// }
-		// else if(WeedFieldTimer[i] == 2)
-		// {
-		// 	UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_ORANGE, "Seeding\nStage: 10\%");
-		// 	WeedFieldTimer[i]++;
-		// }
-		// else if(WeedFieldTimer[i] == 3)
-		// {
-		// 	UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_ORANGE, "Seeding\nStage: 15\%");
-		// 	WeedFieldTimer[i]++;
-		// }
-		// else if(WeedFieldTimer[i] == 4)
-		// {
-		// 	UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_ORANGE, "Seeding\nStage: 20\%");
-		// 	WeedFieldTimer[i]++;
-		// }
-		// else if(WeedFieldTimer[i] == 5)
-		// {
-		// 	UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_ORANGE, "Seeding\nStage: 25%");
-		// 	WeedFieldTimer[i]++;
-		// }
-		// else if(WeedFieldTimer[i] == 6)
-		// {
-		// 	UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_ORANGE, "Seeding\nStage: 30%");
-		// 	WeedFieldTimer[i]++;
-		// }
-		// else if(WeedFieldTimer[i] == 7)
-		// {
-		// 	UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_ORANGE, "Seeding\nStage: 35%");
-		// 	WeedFieldTimer[i]++;
-		// }
-		// else if(WeedFieldTimer[i] == 8)
-		// {
-		// 	UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_ORANGE, "Seeding\nStage: 40%");
-		// 	WeedFieldTimer[i]++;
-		// }
-		// else if(WeedFieldTimer[i] == 9)
-		// {
-		// 	UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_ORANGE, "Seeding\nStage: 45%");
-		// 	WeedFieldTimer[i]++;
-		// }
-		// else if(WeedFieldTimer[i] == 10)
-		// {
-		// 	UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_ORANGE, "Seeding\nStage: 50%");
-		// 	WeedFieldTimer[i]++;
-		// }
-		// else if(WeedFieldTimer[i] == 11)
-		// {
-		// 	UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_ORANGE, "Seeding\nStage: 55%");
-		// 	WeedFieldTimer[i]++;
-		// }
-		// else if(WeedFieldTimer[i] == 12)
-		// {
-		// 	UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_ORANGE, "Seeding\nStage: 60%");
-		// 	WeedFieldTimer[i]++;
-		// }
-		// else if(WeedFieldTimer[i] == 13)
-		// {
-		// 	UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_ORANGE, "Seeding\nStage: 65%");
-		// 	WeedFieldTimer[i]++;
-		// }
-		// else if(WeedFieldTimer[i] == 14)
-		// {
-		// 	UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_ORANGE, "Seeding\nStage: 70%");
-		// 	WeedFieldTimer[i]++;
-		// }
-		// else if(WeedFieldTimer[i] == 15)
-		// {
-		// 	UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_ORANGE, "Seeding\nStage: 75%");
-		// 	WeedFieldTimer[i]++;
-		// }
-		// else if(WeedFieldTimer[i] == 16)
-		// {
-		// 	UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_ORANGE, "Seeding\nStage: 80%");
-		// 	WeedFieldTimer[i]++;
-		// }
-		// else if(WeedFieldTimer[i] == 17)
-		// {
-		// 	UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_ORANGE, "Seeding\nStage: 85%");
-		// 	WeedFieldTimer[i]++;
-		// }
-		// else if(WeedFieldTimer[i] == 18)
-		// {
-		// 	UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_ORANGE, "Seeding\nStage: 90%");
-		// 	WeedFieldTimer[i]++;
-		// }
-		// else if(WeedFieldTimer[i] == 19)
-		// {
-		// 	UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_ORANGE, "Seeding\nStage: 95%");
-		// 	WeedFieldTimer[i]++;
-		// }
-		// else if(WeedFieldTimer[i] == 20)
-		// {
-		// 	UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_ORANGE, "Seeding\nStage: 100%");
-		// 	WeedFieldTimer[i]++;
-		// }
-		// else if(WeedFieldTimer[i] == 21)
-		// {
-		// 	new Float:x, Float:y, Float:z;
-		// 	GetDynamicObjectPos(WeedFieldObject[i], x, y, z);
-		// 	DestroyDynamicObject(WeedFieldObject[i]);
-		// 	WeedFieldObject[i] = CreateDynamicObject(806, x, y, z, 0, 0, 0);
-		// 	UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_YELLOW, "Need Water");
-		// }
-		// else if(WeedFieldTimer[i] == 22)
-		// {
-		// 	UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_YELLOW, "Watering\nStage: 10%");
-		// 	WeedFieldTimer[i]++;
-		// }
-		// else if(WeedFieldTimer[i] == 23)
-		// {
-		// 	UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_YELLOW, "Watering\nStage: 15%");
-		// 	WeedFieldTimer[i]++;
-		// }
-		// else if(WeedFieldTimer[i] == 24)
-		// {
-		// 	UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_YELLOW, "Watering\nStage: 20%");
-		// 	WeedFieldTimer[i]++;
-		// }
-		// else if(WeedFieldTimer[i] == 25)
-		// {
-		// 	UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_YELLOW, "Watering\nStage: 25%");
-		// 	WeedFieldTimer[i]++;
-		// }
-		// else if(WeedFieldTimer[i] == 26)
-		// {
-		// 	UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_YELLOW, "Watering\nStage: 30%");
-		// 	WeedFieldTimer[i]++;
-		// }
-		// else if(WeedFieldTimer[i] == 27)
-		// {
-		// 	UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_YELLOW, "Watering\nStage: 35%");
-		// 	WeedFieldTimer[i]++;
-		// }
-		// else if(WeedFieldTimer[i] == 28)
-		// {
-		// 	UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_YELLOW, "Watering\nStage: 40%");
-		// 	WeedFieldTimer[i]++;
-		// }
-		// else if(WeedFieldTimer[i] == 29)
-		// {
-		// 	UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_YELLOW, "Watering\nStage: 45%");
-		// 	WeedFieldTimer[i]++;
-		// }
-		// else if(WeedFieldTimer[i] == 30)
-		// {
-		// 	UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_YELLOW, "Watering\nStage: 50%");
-		// 	WeedFieldTimer[i]++;
-		// }
-		// else if(WeedFieldTimer[i] == 31)
-		// {
-		// 	UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_YELLOW, "Watering\nStage: 55%");
-		// 	WeedFieldTimer[i]++;
-		// }
-		// else if(WeedFieldTimer[i] == 32)
-		// {
-		// 	UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_YELLOW, "Watering\nStage: 60%");
-		// 	WeedFieldTimer[i]++;
-		// }
-		// else if(WeedFieldTimer[i] == 33)
-		// {
-		// 	UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_YELLOW, "Watering\nStage: 65%");
-		// 	WeedFieldTimer[i]++;
-		// }
-		// else if(WeedFieldTimer[i] == 34)
-		// {
-		// 	UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_YELLOW, "Watering\nStage: 70%");
-		// 	WeedFieldTimer[i]++;
-		// }
-		// else if(WeedFieldTimer[i] == 35)
-		// {
-		// 	UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_YELLOW, "Watering\nStage: 75%");
-		// 	WeedFieldTimer[i]++;
-		// }
-		// else if(WeedFieldTimer[i] == 36)
-		// {
-		// 	UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_YELLOW, "Watering\nStage: 80%");
-		// 	WeedFieldTimer[i]++;
-		// }
-		// else if(WeedFieldTimer[i] == 37)
-		// {
-		// 	UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_YELLOW, "Watering\nStage: 85%");
-		// 	WeedFieldTimer[i]++;
-		// }
-		// else if(WeedFieldTimer[i] == 38)
-		// {
-		// 	UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_YELLOW, "Watering\nStage: 90%");
-		// 	WeedFieldTimer[i]++;
-		// }
-		// else if(WeedFieldTimer[i] == 39)
-		// {
-		// 	UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_YELLOW, "Watering\nStage: 95%");
-		// 	WeedFieldTimer[i]++;
-		// }
-		// else if(WeedFieldTimer[i] == 40)
-		// {
-		// 	UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_YELLOW, "Watering\nStage: 100%");
-		// 	WeedFieldTimer[i]++;
-		// }
-		// else if(WeedFieldTimer[i] == 41)
-		// {
-		// 	new Float:x2, Float:y2, Float:z2;
-		// 	GetDynamicObjectPos(WeedFieldObject[i], x2, y2, z2);
-		// 	DestroyDynamicObject(WeedFieldObject[i]);
-		// 	WeedFieldObject[i] = 0;
-		// 	WeedFieldObject[i] = CreateDynamicObject(19473, x2, y2, z2, 0, 0, 0);
-		// 	UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_GREEN, "Flowering\nStage: 5%");
-		// 	WeedFieldTimer[i]++;
-		// }
-		// else if(WeedFieldTimer[i] == 42)
-		// {
-		// 	UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_GREEN, "Flowering\nStage: 10%");
-		// 	WeedFieldTimer[i]++;
-		// }
-		// else if(WeedFieldTimer[i] == 43)
-		// {
-		// 	UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_GREEN, "Flowering\nStage: 15%");
-		// 	WeedFieldTimer[i]++;
-		// }
-		// else if(WeedFieldTimer[i] == 44)
-		// {
-		// 	UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_GREEN, "Flowering\nStage: 20%");
-		// 	WeedFieldTimer[i]++;
-		// }
-		// else if(WeedFieldTimer[i] == 45)
-		// {
-		// 	UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_GREEN, "Flowering\nStage: 25%");
-		// 	WeedFieldTimer[i]++;
-		// }
-		// else if(WeedFieldTimer[i] == 46)
-		// {
-		// 	UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_GREEN, "Flowering\nStage: 30%");
-		// 	WeedFieldTimer[i]++;
-		// }
-		// else if(WeedFieldTimer[i] == 47)
-		// {
-		// 	UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_GREEN, "Flowering\nStage: 35%");
-		// 	WeedFieldTimer[i]++;
-		// }
-		// else if(WeedFieldTimer[i] == 48)
-		// {
-		// 	UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_GREEN, "Flowering\nStage: 40%");
-		//  	WeedFieldTimer[i]++;
-		// }
-		// else if(WeedFieldTimer[i] == 49)
-		// {
-		// 	UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_GREEN, "Flowering\nStage: 45%");
-		// 	WeedFieldTimer[i]++;
-		// }
-		// else if(WeedFieldTimer[i] == 50)
-		// {
-		// 	UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_GREEN, "Flowering\nStage: 50%");
-		// 	WeedFieldTimer[i]++;
-		// }
-		// else if(WeedFieldTimer[i] == 51)
-		// {
-		// 	UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_GREEN, "Flowering\nStage: 55%");
-		// 	WeedFieldTimer[i]++;
-		// }
-		// else if(WeedFieldTimer[i] == 52)
-		// {
-		// 	UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_GREEN, "Flowering\nStage: 60%");
-		// 	WeedFieldTimer[i]++;
-		// }
-		// else if(WeedFieldTimer[i] == 53)
-		// {
-		// 	UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_GREEN, "Flowering\nStage: 65%");
-		// 	WeedFieldTimer[i]++;
-		// }
-		// else if(WeedFieldTimer[i] == 54)
-		// {
-		// 	UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_GREEN, "Flowering\nStage: 70%");
-		// 	WeedFieldTimer[i]++;
-		// }
-		// else if(WeedFieldTimer[i] == 55)
-		// {
-		// 	UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_GREEN, "Flowering\nStage: 75%");
-		// 	WeedFieldTimer[i]++;
-		// }
-		// else if(WeedFieldTimer[i] == 56)
-		// {
-		// 	UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_GREEN, "Flowering\nStage: 80%");
-		// 	WeedFieldTimer[i]++;
-		// }
-		// else if(WeedFieldTimer[i] == 57)
-		// {
-		// 	UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_GREEN, "Flowering\nStage: 85%");
-		// 	WeedFieldTimer[i]++;
-		// }
-		// else if(WeedFieldTimer[i] == 58)
-		// {
-		// 	UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_GREEN, "Flowering\nStage: 90%");
-		// 	WeedFieldTimer[i]++;
-		// }
-		// else if(WeedFieldTimer[i] == 59)
-		// {
-		// 	UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_GREEN, "Flowering\nStage: 95%");
-		// 	WeedFieldTimer[i]++;
-		// }
-		// else if(WeedFieldTimer[i] == 60)
-		// {
-		// 	UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_GREEN, "Done\nStage: Ready");
-		// 	WeedFieldTimer[i]++;
-		// }
+	// 	if(WeedFieldTimer[i] == 1)
+	// 	{
+	// 		UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_ORANGE, "Seeding\nStage: 5\%");
+	// 		WeedFieldTimer[i]++;
+	// 	}
+	// 	else if(WeedFieldTimer[i] == 2)
+	// 	{
+	// 		UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_ORANGE, "Seeding\nStage: 10\%");
+	// 		WeedFieldTimer[i]++;
+	// 	}
+	// 	else if(WeedFieldTimer[i] == 3)
+	// 	{
+	// 		UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_ORANGE, "Seeding\nStage: 15\%");
+	// 		WeedFieldTimer[i]++;
+	// 	}
+	// 	else if(WeedFieldTimer[i] == 4)
+	// 	{
+	// 		UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_ORANGE, "Seeding\nStage: 20\%");
+	// 		WeedFieldTimer[i]++;
+	// 	}
+	// 	else if(WeedFieldTimer[i] == 5)
+	// 	{
+	// 		UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_ORANGE, "Seeding\nStage: 25%");
+	// 		WeedFieldTimer[i]++;
+	// 	}
+	// 	else if(WeedFieldTimer[i] == 6)
+	// 	{
+	// 		UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_ORANGE, "Seeding\nStage: 30%");
+	// 		WeedFieldTimer[i]++;
+	// 	}
+	// 	else if(WeedFieldTimer[i] == 7)
+	// 	{
+	// 		UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_ORANGE, "Seeding\nStage: 35%");
+	// 		WeedFieldTimer[i]++;
+	// 	}
+	// 	else if(WeedFieldTimer[i] == 8)
+	// 	{
+	// 		UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_ORANGE, "Seeding\nStage: 40%");
+	// 		WeedFieldTimer[i]++;
+	// 	}
+	// 	else if(WeedFieldTimer[i] == 9)
+	// 	{
+	// 		UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_ORANGE, "Seeding\nStage: 45%");
+	// 		WeedFieldTimer[i]++;
+	// 	}
+	// 	else if(WeedFieldTimer[i] == 10)
+	// 	{
+	// 		UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_ORANGE, "Seeding\nStage: 50%");
+	// 		WeedFieldTimer[i]++;
+	// 	}
+	// 	else if(WeedFieldTimer[i] == 11)
+	// 	{
+	// 		UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_ORANGE, "Seeding\nStage: 55%");
+	// 		WeedFieldTimer[i]++;
+	// 	}
+	// 	else if(WeedFieldTimer[i] == 12)
+	// 	{
+	// 		UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_ORANGE, "Seeding\nStage: 60%");
+	// 		WeedFieldTimer[i]++;
+	// 	}
+	// 	else if(WeedFieldTimer[i] == 13)
+	// 	{
+	// 		UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_ORANGE, "Seeding\nStage: 65%");
+	// 		WeedFieldTimer[i]++;
+	// 	}
+	// 	else if(WeedFieldTimer[i] == 14)
+	// 	{
+	// 		UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_ORANGE, "Seeding\nStage: 70%");
+	// 		WeedFieldTimer[i]++;
+	// 	}
+	// 	else if(WeedFieldTimer[i] == 15)
+	// 	{
+	// 		UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_ORANGE, "Seeding\nStage: 75%");
+	// 		WeedFieldTimer[i]++;
+	// 	}
+	// 	else if(WeedFieldTimer[i] == 16)
+	// 	{
+	// 		UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_ORANGE, "Seeding\nStage: 80%");
+	// 		WeedFieldTimer[i]++;
+	// 	}
+	// 	else if(WeedFieldTimer[i] == 17)
+	// 	{
+	// 		UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_ORANGE, "Seeding\nStage: 85%");
+	// 		WeedFieldTimer[i]++;
+	// 	}
+	// 	else if(WeedFieldTimer[i] == 18)
+	// 	{
+	// 		UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_ORANGE, "Seeding\nStage: 90%");
+	// 		WeedFieldTimer[i]++;
+	// 	}
+	// 	else if(WeedFieldTimer[i] == 19)
+	// 	{
+	// 		UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_ORANGE, "Seeding\nStage: 95%");
+	// 		WeedFieldTimer[i]++;
+	// 	}
+	// 	else if(WeedFieldTimer[i] == 20)
+	// 	{
+	// 		UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_ORANGE, "Seeding\nStage: 100%");
+	// 		WeedFieldTimer[i]++;
+	// 	}
+	// 	else if(WeedFieldTimer[i] == 21)
+	// 	{
+	// 		new Float:x, Float:y, Float:z;
+	// 		GetDynamicObjectPos(WeedFieldObject[i], x, y, z);
+	// 		DestroyDynamicObject(WeedFieldObject[i]);
+	// 		WeedFieldObject[i] = CreateDynamicObject(806, x, y, z, 0, 0, 0);
+	// 		UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_YELLOW, "Need Water");
+	// 	}
+	// 	else if(WeedFieldTimer[i] == 22)
+	// 	{
+	// 		UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_YELLOW, "Watering\nStage: 10%");
+	// 		WeedFieldTimer[i]++;
+	// 	}
+	// 	else if(WeedFieldTimer[i] == 23)
+	// 	{
+	// 		UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_YELLOW, "Watering\nStage: 15%");
+	// 		WeedFieldTimer[i]++;
+	// 	}
+	// 	else if(WeedFieldTimer[i] == 24)
+	// 	{
+	// 		UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_YELLOW, "Watering\nStage: 20%");
+	// 		WeedFieldTimer[i]++;
+	// 	}
+	// 	else if(WeedFieldTimer[i] == 25)
+	// 	{
+	// 		UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_YELLOW, "Watering\nStage: 25%");
+	// 		WeedFieldTimer[i]++;
+	// 	}
+	// 	else if(WeedFieldTimer[i] == 26)
+	// 	{
+	// 		UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_YELLOW, "Watering\nStage: 30%");
+	// 		WeedFieldTimer[i]++;
+	// 	}
+	// 	else if(WeedFieldTimer[i] == 27)
+	// 	{
+	// 		UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_YELLOW, "Watering\nStage: 35%");
+	// 		WeedFieldTimer[i]++;
+	// 	}
+	// 	else if(WeedFieldTimer[i] == 28)
+	// 	{
+	// 		UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_YELLOW, "Watering\nStage: 40%");
+	// 		WeedFieldTimer[i]++;
+	// 	}
+	// 	else if(WeedFieldTimer[i] == 29)
+	// 	{
+	// 		UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_YELLOW, "Watering\nStage: 45%");
+	// 		WeedFieldTimer[i]++;
+	// 	}
+	// 	else if(WeedFieldTimer[i] == 30)
+	// 	{
+	// 		UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_YELLOW, "Watering\nStage: 50%");
+	// 		WeedFieldTimer[i]++;
+	// 	}
+	// 	else if(WeedFieldTimer[i] == 31)
+	// 	{
+	// 		UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_YELLOW, "Watering\nStage: 55%");
+	// 		WeedFieldTimer[i]++;
+	// 	}
+	// 	else if(WeedFieldTimer[i] == 32)
+	// 	{
+	// 		UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_YELLOW, "Watering\nStage: 60%");
+	// 		WeedFieldTimer[i]++;
+	// 	}
+	// 	else if(WeedFieldTimer[i] == 33)
+	// 	{
+	// 		UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_YELLOW, "Watering\nStage: 65%");
+	// 		WeedFieldTimer[i]++;
+	// 	}
+	// 	else if(WeedFieldTimer[i] == 34)
+	// 	{
+	// 		UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_YELLOW, "Watering\nStage: 70%");
+	// 		WeedFieldTimer[i]++;
+	// 	}
+	// 	else if(WeedFieldTimer[i] == 35)
+	// 	{
+	// 		UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_YELLOW, "Watering\nStage: 75%");
+	// 		WeedFieldTimer[i]++;
+	// 	}
+	// 	else if(WeedFieldTimer[i] == 36)
+	// 	{
+	// 		UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_YELLOW, "Watering\nStage: 80%");
+	// 		WeedFieldTimer[i]++;
+	// 	}
+	// 	else if(WeedFieldTimer[i] == 37)
+	// 	{
+	// 		UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_YELLOW, "Watering\nStage: 85%");
+	// 		WeedFieldTimer[i]++;
+	// 	}
+	// 	else if(WeedFieldTimer[i] == 38)
+	// 	{
+	// 		UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_YELLOW, "Watering\nStage: 90%");
+	// 		WeedFieldTimer[i]++;
+	// 	}
+	// 	else if(WeedFieldTimer[i] == 39)
+	// 	{
+	// 		UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_YELLOW, "Watering\nStage: 95%");
+	// 		WeedFieldTimer[i]++;
+	// 	}
+	// 	else if(WeedFieldTimer[i] == 40)
+	// 	{
+	// 		UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_YELLOW, "Watering\nStage: 100%");
+	// 		WeedFieldTimer[i]++;
+	// 	}
+	// 	else if(WeedFieldTimer[i] == 41)
+	// 	{
+	// 		new Float:x2, Float:y2, Float:z2;
+	// 		GetDynamicObjectPos(WeedFieldObject[i], x2, y2, z2);
+	// 		DestroyDynamicObject(WeedFieldObject[i]);
+	// 		WeedFieldObject[i] = 0;
+	// 		WeedFieldObject[i] = CreateDynamicObject(19473, x2, y2, z2, 0, 0, 0);
+	// 		UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_GREEN, "Flowering\nStage: 5%");
+	// 		WeedFieldTimer[i]++;
+	// 	}
+	// 	else if(WeedFieldTimer[i] == 42)
+	// 	{
+	// 		UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_GREEN, "Flowering\nStage: 10%");
+	// 		WeedFieldTimer[i]++;
+	// 	}
+	// 	else if(WeedFieldTimer[i] == 43)
+	// 	{
+	// 		UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_GREEN, "Flowering\nStage: 15%");
+	// 		WeedFieldTimer[i]++;
+	// 	}
+	// 	else if(WeedFieldTimer[i] == 44)
+	// 	{
+	// 		UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_GREEN, "Flowering\nStage: 20%");
+	// 		WeedFieldTimer[i]++;
+	// 	}
+	// 	else if(WeedFieldTimer[i] == 45)
+	// 	{
+	// 		UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_GREEN, "Flowering\nStage: 25%");
+	// 		WeedFieldTimer[i]++;
+	// 	}
+	// 	else if(WeedFieldTimer[i] == 46)
+	// 	{
+	// 		UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_GREEN, "Flowering\nStage: 30%");
+	// 		WeedFieldTimer[i]++;
+	// 	}
+	// 	else if(WeedFieldTimer[i] == 47)
+	// 	{
+	// 		UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_GREEN, "Flowering\nStage: 35%");
+	// 		WeedFieldTimer[i]++;
+	// 	}
+	// 	else if(WeedFieldTimer[i] == 48)
+	// 	{
+	// 		UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_GREEN, "Flowering\nStage: 40%");
+	// 	 	WeedFieldTimer[i]++;
+	// 	}
+	// 	else if(WeedFieldTimer[i] == 49)
+	// 	{
+	// 		UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_GREEN, "Flowering\nStage: 45%");
+	// 		WeedFieldTimer[i]++;
+	// 	}
+	// 	else if(WeedFieldTimer[i] == 50)
+	// 	{
+	// 		UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_GREEN, "Flowering\nStage: 50%");
+	// 		WeedFieldTimer[i]++;
+	// 	}
+	// 	else if(WeedFieldTimer[i] == 51)
+	// 	{
+	// 		UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_GREEN, "Flowering\nStage: 55%");
+	// 		WeedFieldTimer[i]++;
+	// 	}
+	// 	else if(WeedFieldTimer[i] == 52)
+	// 	{
+	// 		UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_GREEN, "Flowering\nStage: 60%");
+	// 		WeedFieldTimer[i]++;
+	// 	}
+	// 	else if(WeedFieldTimer[i] == 53)
+	// 	{
+	// 		UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_GREEN, "Flowering\nStage: 65%");
+	// 		WeedFieldTimer[i]++;
+	// 	}
+	// 	else if(WeedFieldTimer[i] == 54)
+	// 	{
+	// 		UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_GREEN, "Flowering\nStage: 70%");
+	// 		WeedFieldTimer[i]++;
+	// 	}
+	// 	else if(WeedFieldTimer[i] == 55)
+	// 	{
+	// 		UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_GREEN, "Flowering\nStage: 75%");
+	// 		WeedFieldTimer[i]++;
+	// 	}
+	// 	else if(WeedFieldTimer[i] == 56)
+	// 	{
+	// 		UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_GREEN, "Flowering\nStage: 80%");
+	// 		WeedFieldTimer[i]++;
+	// 	}
+	// 	else if(WeedFieldTimer[i] == 57)
+	// 	{
+	// 		UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_GREEN, "Flowering\nStage: 85%");
+	// 		WeedFieldTimer[i]++;
+	// 	}
+	// 	else if(WeedFieldTimer[i] == 58)
+	// 	{
+	// 		UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_GREEN, "Flowering\nStage: 90%");
+	// 		WeedFieldTimer[i]++;
+	// 	}
+	// 	else if(WeedFieldTimer[i] == 59)
+	// 	{
+	// 		UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_GREEN, "Flowering\nStage: 95%");
+	// 		WeedFieldTimer[i]++;
+	// 	}
+	// 	else if(WeedFieldTimer[i] == 60)
+	// 	{
+	// 		UpdateDynamic3DTextLabelText(WeedField3D[i], COLOR_WEED_GREEN, "Done\nStage: Ready");
+	// 		WeedFieldTimer[i]++;
+	// 	}
 	}
 	return 1;
 }
@@ -577,7 +592,7 @@ CMD:giveitem(playerid, params[])
 	if(sscanf(params, "is[32]i", targetid, item, amount))
 		return SendClientMessage(playerid, COLOR_ERROR, "[Usage]: /giveitem [playerid/name] [item] [amount]");
 	else if(!IsPlayerAdmin(playerid))
-		return SCM(playerid, COLOR_ERROR, "You are not rcon login to use this command.");
+		return SendClientMessage(playerid, COLOR_ERROR, "You are not rcon login to use this command.");
 	else if(amount <= 0)
 		return SendClientMessage(playerid, COLOR_ERROR, "[ERROR]: You entered invaild amount.");
 	else if(targetid < 0 || targetid > MAX_PLAYERS)
@@ -585,17 +600,17 @@ CMD:giveitem(playerid, params[])
 	if(strfind(item, "WeedSeed", true) != -1)
 	{
 		PlayerItem[targetid][0] += amount;
-		SM(targetid, COLOR_LIGHT_BLUE, "You got %i Weed Seed.", amount);
+		SendClientMessageEx(targetid, COLOR_LIGHT_BLUE, "You got %i Weed Seed.", amount);
 	}
 	else if(strfind(item, "Water", true) != -1)
 	{
 		PlayerItem[targetid][1] += amount;
-		SM(targetid, COLOR_LIGHT_BLUE, "You got %i Water.", amount);
+		SendClientMessageEx(targetid, COLOR_LIGHT_BLUE, "You got %i Water.", amount);
 	}
 	else if(strfind(item, "Weed", true) != -1)
 	{	
 		PlayerItem[targetid][2] += amount;
-		SM(targetid, COLOR_LIGHT_BLUE, "You got %i Weed.", amount);
+		SendClientMessageEx(targetid, COLOR_LIGHT_BLUE, "You got %i Weed.", amount);
 	}
 	return 1;
 }
@@ -618,14 +633,14 @@ CMD:inventory(playerid, params[])
 		}
 		else if(empty == 3)
 		{
-			return SM(playerid, COLOR_ERROR, "You do not have any item on your inventory.");
+			return SendClientMessageEx(playerid, COLOR_ERROR, "You do not have any item on your inventory.");
 		}
 	}
 	ShowPlayerDialog(playerid, DIALOG_INVENTORY, DIALOG_STYLE_TABLIST, "Inventory", string, "Okay", "Close");
 	return 1;
 }
-CMD:items(playerid, params[]) return callcmd::inventory(playerid, params);
-CMD:inv(playerid, params[]) return callcmd::inventory(playerid, params);
+//CMD:items(playerid, params[]) return callcmd::inventory(playerid, params);
+//CMD:inv(playerid, params[]) return callcmd::inventory(playerid, params);
 
 stock SendClientMessageEx(playerid, color, const str[], {Float,_}:...)
 {
