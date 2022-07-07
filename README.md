@@ -4,9 +4,9 @@ Weed Drug System for SAMP Roleplay.
 
 ### Screenshot
 #
-![alt text](https://cdn.discordapp.com/attachments/840049231078490182/843792902714818581/sa-mp-043.png)
-![alt text](https://cdn.discordapp.com/attachments/840049231078490182/843792897475215400/sa-mp-039.png)
-![alt text](https://cdn.discordapp.com/attachments/840049231078490182/843792903881097236/sa-mp-046.png)
+![alt text](https://cdn.discordapp.com/attachments/823203038251974656/843808322037481532/sa-mp-039.png)
+![alt text](https://cdn.discordapp.com/attachments/823203038251974656/843808329809920000/sa-mp-043.png)
+![alt text](https://cdn.discordapp.com/attachments/823203038251974656/843808327997456404/sa-mp-046.png)
 #
 ### Library Used
 [sscanf](https://github.com/maddinat0r/sscanf)\
