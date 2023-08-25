@@ -1,5 +1,0 @@
-{
-    "user": "oscar-broman",
-    "repo": "md-sort",
-    "dependencies": ["sampctl/samp-stdlib"]
-}
