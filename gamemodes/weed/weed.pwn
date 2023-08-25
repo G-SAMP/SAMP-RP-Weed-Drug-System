@@ -139,11 +139,9 @@ hook OnPlayerLeaveDynArea(playerid, areaid){
 				if(IsPlayerInRangeOfPoint(playerid, 2.0, x1, y1, z1)) return SendClientMessage(playerid, COLOR_ERROR, "You can't plant a seed near a weed plant.");
 				
 				if(i == plant){ // checks if already exists
-					SendClientMessageEx(playerid, COLOR_ERROR, "Plant ID: %d exists..", plant);
 					i++;
 				}
 			}
-			SendClientMessageEx(playerid, COLOR_ERROR, "Plant ID: %d empty..", i);
 
 			g_TotalWeedPlant++;
 			Iter_Add(g_WeedPlant, i);

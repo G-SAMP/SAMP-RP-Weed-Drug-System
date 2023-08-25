@@ -20,6 +20,6 @@ main(){
 
 /*
     HOW TO BUILD?
-        - Change `g_PlayerInventory[playerid]` to your inventory variables or you can use (`getInvitem` or 'setInvitem')
+        - Change `g_PlayerInventory[playerid]` to your inventory variables or you can use (`getInvitem` or 'setInvitem') functions
         - Compile and Run!
 */
